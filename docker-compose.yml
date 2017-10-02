@@ -1,0 +1,29 @@
+version: '2'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./web/Dockerfile
+    volumes:
+      - .:/code
+    env_file:
+      - mysqldb.env
+    working_dir: /code
+    ports:
+      - "13000:5000"
+    expose:
+      - "5000"
+    links:
+      - mysqldb
+  mysqldb:
+    image: mariadb:latest
+    env_file:
+      - mysqldb.env
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "13010:80"
+    env_file:
+      - phpmyadmin.env
+    links:
+      - mysqldb

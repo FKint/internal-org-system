@@ -1,0 +1,4 @@
+-r ../revue/requirements.txt
+
+
+Flask==0.12.2
